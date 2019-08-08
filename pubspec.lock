@@ -22,15 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
-  bluetooth_query:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a0a0672068cbbc2aeb4f9b944bd029eaf2f8aa8f
-      url: "https://github.com/vferreirati/bluetooth_query.git"
-    source: git
-    version: "0.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -51,7 +42,7 @@ packages:
       name: build_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.1+1"
   build_daemon:
     dependency: transitive
     description:
@@ -79,7 +70,7 @@ packages:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.7"
+    version: "3.0.8"
   built_collection:
     dependency: transitive
     description:
@@ -107,7 +98,7 @@ packages:
       name: checked_yaml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   code_builder:
     dependency: transitive
     description:
@@ -135,7 +126,7 @@ packages:
       name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.6"
+    version: "2.1.1+1"
   csslib:
     dependency: transitive
     description:
@@ -327,7 +318,7 @@ packages:
       name: pubspec_parse
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.4"
+    version: "0.1.5"
   quiver:
     dependency: transitive
     description:
@@ -335,13 +326,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
-  rxdart:
-    dependency: "direct main"
-    description:
-      name: rxdart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.22.1"
   shelf:
     dependency: transitive
     description:

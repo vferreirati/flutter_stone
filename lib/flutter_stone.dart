@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:bluetooth_query/bluetooth_device.dart';
 
 part 'flutter_stone.g.dart';
 
@@ -21,4 +20,6 @@ part 'src/enums/android_errors_enum.dart';
 
 part 'src/enums/mode_enum.dart';
 
-part 'src/models/InitArguments.dart';
+part 'src/models/init_arguments.dart';
+
+part 'src/models/bluetooth_device.dart';

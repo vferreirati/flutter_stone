@@ -11,10 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  bluetooth_query:
-    git:
-      url: https://github.com/vferreirati/bluetooth_query.git
-  rxdart:
   json_serializable:
 
 dev_dependencies:

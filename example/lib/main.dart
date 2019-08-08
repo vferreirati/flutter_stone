@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bluetooth_query/bluetooth_query.dart';
-import 'package:bluetooth_query/bluetooth_device.dart';
 import 'package:flutter_stone/flutter_stone.dart';
 import 'dart:io';
 
@@ -23,7 +21,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     if(Platform.isAndroid) {
-      BluetoothQuery.initialize();
+      FlutterStone.initializeBluetooth();
     }
   }
 
@@ -148,14 +146,14 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _turnBluetoothOn() async {
-    if(!await BluetoothQuery.isBluetoothEnabled()) {
-      BluetoothQuery.askToTurnBluetoothOn();
+    if(!await FlutterStone.isBluetoothEnabled()) {
+      FlutterStone.askToTurnBluetoothOn();
     }
   }
 
   void _gpsPermission() async {
-    if(!await BluetoothQuery.checkLocationPermission()) {
-      BluetoothQuery.askLocationPermission();
+    if(!await FlutterStone.checkLocationPermission()) {
+      FlutterStone.askLocationPermission();
     }
   }
 
@@ -163,7 +161,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _devices.clear();
     });
-    BluetoothQuery.startScan().listen((device) {
+    FlutterStone.startScan().listen((device) {
       print('Found device: ${device.name}');
       setState(() {
         _devices.add(device);
@@ -174,7 +172,7 @@ class _MyAppState extends State<MyApp> {
   void _onDeviceSelected(BluetoothDevice device) async {
     print('Device selected \"${device.name}\"');
     final event = await FlutterStone.connectToDeviceAndroid(device);
-
+    print(event.errorCode);
     setState(() {
       _connected = event.connectionSuccessful;
     });
@@ -182,7 +180,7 @@ class _MyAppState extends State<MyApp> {
 
   void _makeTransaction(BuildContext ctx) async {
     final transaction = Transaction(
-      "1500",
+      "100",
       12,
       1,
       "Serveloja",
