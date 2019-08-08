@@ -100,7 +100,7 @@ class FlutterStonePlugin(
             "startStoneSdk" -> {
                 val jsonString: String = call.arguments()
                 val arguments = gson.fromJson(jsonString, InitArguments::class.java)
-                startPlugin(result, arguments)
+                startStoneSdk(result, arguments)
             }
             "connectToDevice" ->  {
                 val jsonString: String = call.arguments()
@@ -113,7 +113,7 @@ class FlutterStonePlugin(
                 makeTransaction(transaction, result)
             }
             "writeToDisplay" -> writeToDisplay(call.arguments(), result)
-            "initializeBluetooth" -> result.success(init())
+            "initializeBluetooth" -> result.success(initializeBluetooth())
             "isBluetoothEnabled" -> result.success(isBluetoothEnabled())
             "askToTurnBluetoothOn" -> {
                 if(currentRequestResult != null)
@@ -136,7 +136,7 @@ class FlutterStonePlugin(
      * Starts the StonePlugin
      * returns if the plugin started successfully
      * */
-    private fun startPlugin(result: Result, arguments: InitArguments) {
+    private fun startStoneSdk(result: Result, arguments: InitArguments) {
         user = StoneStart.init(registrar.context().applicationContext)
         Stone.setAppName("Serveloja")
 
@@ -332,7 +332,7 @@ class FlutterStonePlugin(
      * Starts the bluetooth query plugin by getting the BluetoothAdapter instance
      * Returns false if the device doesn't support bluetooth
      * */
-    private fun init(): Boolean {
+    private fun initializeBluetooth(): Boolean {
         val adapter = BluetoothAdapter.getDefaultAdapter()
         if(adapter != null) {
             btAdapter = adapter
