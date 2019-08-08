@@ -1,0 +1,28 @@
+PODS:
+  - bluetooth_query (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_stone (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - bluetooth_query (from `.symlinks/plugins/bluetooth_query/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_stone (from `.symlinks/plugins/flutter_stone/ios`)
+
+EXTERNAL SOURCES:
+  bluetooth_query:
+    :path: ".symlinks/plugins/bluetooth_query/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_stone:
+    :path: ".symlinks/plugins/flutter_stone/ios"
+
+SPEC CHECKSUMS:
+  bluetooth_query: 6d37067ce4d02a9164c64ca86d0d105eff6e27a4
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_stone: 2966250edb720f661363fc26bf6b5615398fef6f
+
+PODFILE CHECKSUM: b6a0a141693093b304368d08511b46cf3d1d0ac5
+
+COCOAPODS: 1.8.0.beta.1

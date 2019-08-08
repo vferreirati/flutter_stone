@@ -1,0 +1,29 @@
+name: flutter_stone
+description: A new flutter plugin project.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  bluetooth_query:
+    git:
+      url: https://github.com/vferreirati/bluetooth_query.git
+  rxdart:
+  json_serializable:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+  build_runner:
+
+flutter:
+  plugin:
+    androidPackage: com.vferreirati.flutter_stone
+    pluginClass: FlutterStonePlugin
