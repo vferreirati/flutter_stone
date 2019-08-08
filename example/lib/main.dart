@@ -15,6 +15,7 @@ class _MyAppState extends State<MyApp> {
   bool _pluginStarted = false;
   bool _connected = false;
   List<BluetoothDevice> _devices = [];
+  final controller = TextEditingController();
 
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _startPlugin(BuildContext ctx) async {
-    final started = await FlutterStone.startPlugin(InitArguments("ADD YOUR STONE CODE HERE", ModeEnum.SANDBOX));
+    final started = await FlutterStone.startPlugin(InitArguments(controller.text, ModeEnum.SANDBOX));
     
     if(!started) {
       final snack = SnackBar(content: Text('Plugin failed to start'),);
@@ -53,6 +54,13 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               children: <Widget>[
                 _buildPluginStatusIcon(),
+                SizedBox(height: 20,),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: TextField(
+                    controller: controller,
+                  ),
+                ),
                 SizedBox(height: 20,),
                 RaisedButton(
                   child: Text('Start Plugin'),
@@ -180,9 +188,9 @@ class _MyAppState extends State<MyApp> {
 
   void _makeTransaction(BuildContext ctx) async {
     final transaction = Transaction(
-      "100",
+      "10000",
       12,
-      1,
+      2,
       "Serveloja",
       "5993",
       "Aracaju",

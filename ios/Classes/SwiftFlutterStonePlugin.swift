@@ -15,7 +15,7 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
      */
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch(call.method) {
-        case "startPlugin":
+        case "startStoneSdk":
             startPlugin(result, call.arguments)
             break
         case "writeToDisplay":
@@ -49,6 +49,8 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
                     }
                 }
             }
+            STNConfig.environment = obj.mode == "SANDBOX" ? STNEnvironmentSandbox : STNEnvironmentProduction
+            
         } catch let jsonError {
             print(jsonError)
             result(false)
@@ -83,6 +85,7 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
                 let jsonString = String(data: data, encoding: .utf8)
                 result(jsonString)
             } catch let jsonError {
+                print(jsonError)
                 result(nil)
             }
         }
@@ -157,7 +160,7 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
         transaction.subMerchantPostalAddress = obj.subMerchantPostalAddress
         transaction.subMerchantTaxIdentificationNumber = obj.subMerchantTaxIdentificationNumber
         transaction.subMerchantRegisteredIdentifier = obj.subMerchantRegistedIdentifier
-        transaction.merchant = STNMerchantModel()
+        transaction.merchant = STNMerchantListProvider.listMerchants()?.first as? STNMerchantModel
         
         if(obj.typeOfTransaction == 1) {
             transaction.instalmentAmount = STNTransactionInstalmentAmountOne
