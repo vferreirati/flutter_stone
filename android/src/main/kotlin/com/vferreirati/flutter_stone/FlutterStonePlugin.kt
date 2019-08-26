@@ -357,13 +357,13 @@ class FlutterStonePlugin(
     /**
      * Check if the application has access to the devices GPS
      * */
-    private fun checkLocationPermission() = ContextCompat.checkSelfPermission(registrar.activity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    private fun checkLocationPermission() = ContextCompat.checkSelfPermission(registrar.activity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
     /**
      * Asks the user for Location permission
      * */
     private fun askLocationPermission() {
-        ActivityCompat.requestPermissions(registrar.activity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        ActivityCompat.requestPermissions(registrar.activity(), arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_LOCATION_PERMISSION)
     }
 
     /**
