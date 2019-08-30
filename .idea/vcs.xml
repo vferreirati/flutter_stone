@@ -2,7 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/example/ios/.symlinks/plugins/bluetooth_query" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_stone" vcs="Git" />
   </component>
 </project>

@@ -81,4 +81,10 @@ class FlutterStone {
   static Future<bool> writeToDisplay(String message) async {
     return await _channel.invokeMethod('writeToDisplay', message);
   }
+
+  static Future<List<BluetoothDevice>> getPairedDevices() async {
+    final jsonString = await _channel.invokeMethod('getPairedDevices');
+    final jsonList = json.decode(jsonString);
+    return (jsonList as List).map((map) => BluetoothDevice.fromJson(map)).toList();
+  }
 }

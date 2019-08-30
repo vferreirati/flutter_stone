@@ -129,6 +129,7 @@ class FlutterStonePlugin(
                 askLocationPermission()
             }
             "startScan" -> startScan()
+            "getPairedDevices" -> result.success(getPairedDevices())
         }
     }
 
@@ -370,6 +371,18 @@ class FlutterStonePlugin(
      * Start scanning for devices
      * */
     private fun startScan() = btAdapter.startDiscovery()
+
+    /**
+     * Gets and returns the list of bluetooth devices bonded to this device
+     * */
+    private fun getPairedDevices(): String {
+        val devices = btAdapter.bondedDevices
+        val list = mutableListOf<FoundDevice>()
+        for(device in devices) {
+            list.add(FoundDevice(name = device.name, address = device.address))
+        }
+        return Gson().toJson(list)
+    }
 
     /**
      * Android callback
