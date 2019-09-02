@@ -116,8 +116,7 @@ class FlutterStonePlugin(
             "initializeBluetooth" -> result.success(initializeBluetooth())
             "isBluetoothEnabled" -> result.success(isBluetoothEnabled())
             "askToTurnBluetoothOn" -> {
-                if(currentRequestResult != null)
-                    throw IllegalStateException("Already requesting permission!")
+                check(currentRequestResult == null) { "Already requesting permission!" }
                 currentRequestResult = result
                 askToTurnBluetoothOn()
             }
@@ -174,24 +173,27 @@ class FlutterStonePlugin(
         currentPinpadObject = PinpadObject(pinpadDevice.name, pinpadDevice.address, false)
 
         val connectionProvider = BluetoothConnectionProvider(registrar.activity(), currentPinpadObject)
-        connectionProvider.dialogTitle = "Aguarde"
-        connectionProvider.dialogMessage = "Conectando com pinpad..."
-        connectionProvider.useDefaultUI(true)
         connectionProvider.connectionCallback = object: StoneCallbackInterface {
             override fun onSuccess() {
                 result.success(gson.toJson(ConnectionEvent()))
             }
 
             override fun onError() {
-                currentPinpadObject = null
                 val errors = connectionProvider.listOfErrors
-                if(errors.isEmpty()) {
-                    val event = ConnectionEvent(errorCode = TIME_OUT)
-                    result.success(gson.toJson(event))
-                } else {
-                    val error = errors.first()
-                    val event = ConnectionEvent(errorCode = mapErrorToErrorCode(error))
-                    result.success(gson.toJson(event))
+                when {
+                    errors.isEmpty() -> {
+                        currentPinpadObject = null
+                        val event = ConnectionEvent(errorCode = TIME_OUT)
+                        result.success(gson.toJson(event))
+
+                    }
+                    errors.first() == ErrorsEnum.PINPAD_ALREADY_CONNECTED -> result.success(gson.toJson(ConnectionEvent()))
+                    else -> {
+                        currentPinpadObject = null
+                        val error = errors.first()
+                        val event = ConnectionEvent(errorCode = mapErrorToErrorCode(error))
+                        result.success(gson.toJson(event))
+                    }
                 }
             }
         }
