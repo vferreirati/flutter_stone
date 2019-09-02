@@ -144,8 +144,6 @@ class FlutterStonePlugin(
             val stoneCodeList = listOf(arguments.stoneCode)
 
             val appProvider = ActiveApplicationProvider(registrar.context().applicationContext)
-            appProvider.dialogTitle = "Aguarde"
-            appProvider.dialogMessage = "Ativando o aplicativo..."
             appProvider.connectionCallback = object : StoneCallbackInterface {
                 override fun onSuccess() {
                     result.success(true)
@@ -231,9 +229,6 @@ class FlutterStonePlugin(
         }
 
         val transactionProvider = TransactionProvider(registrar.activeContext(), transactionObject, user?.first(), currentPinpadObject)
-        transactionProvider.dialogMessage = "Enviando..."
-        transactionProvider.dialogTitle = "Aguarde"
-        transactionProvider.useDefaultUI(true)
         transactionProvider.connectionCallback = object: StoneCallbackInterface {
             override fun onSuccess() {
                 result.success(gson.toJson(mapTransactionObjectToTransactionEvent(transactionObject)))
