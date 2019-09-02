@@ -185,7 +185,18 @@ class FlutterStonePlugin(
                         result.success(gson.toJson(event))
 
                     }
-                    errors.first() == ErrorsEnum.PINPAD_ALREADY_CONNECTED -> result.success(gson.toJson(ConnectionEvent()))
+                    errors.first() == ErrorsEnum.PINPAD_ALREADY_CONNECTED -> {
+                        val device = Stone.getPinpadObjectList().find { p -> p.macAddress == pinpadDevice.address }
+                        if(device != null) {
+                            currentPinpadObject = device
+                            result.success(gson.toJson(ConnectionEvent()))
+                        } else {
+                            currentPinpadObject = null
+                            val error = errors.first()
+                            val event = ConnectionEvent(errorCode = mapErrorToErrorCode(error))
+                            result.success(gson.toJson(event))
+                        }
+                    }
                     else -> {
                         currentPinpadObject = null
                         val error = errors.first()
@@ -290,6 +301,7 @@ class FlutterStonePlugin(
      * */
     private fun mapTransactionObjectToTransactionEvent(transactionObject: TransactionObject) = TransactionEvent(
             errorCode = null,
+            authorizationCode = transactionObject.authorizationCode,
             transactionDate = transactionObject.date,
             cardBrand = transactionObject.cardBrand.toString(),
             cardNumber = transactionObject.cardHolderNumber,
