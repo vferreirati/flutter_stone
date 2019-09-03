@@ -58,6 +58,7 @@ TransactionEvent _$TransactionEventFromJson(Map<String, dynamic> json) {
     json['typeOfTransaction'] as int,
     json['authorizationCode'] as String,
     json['instalmentCount'] as int,
+    json['transactionStatus'] as int,
   );
 }
 
@@ -72,6 +73,7 @@ Map<String, dynamic> _$TransactionEventToJson(TransactionEvent instance) =>
       'typeOfTransaction': instance.typeOfTransaction,
       'authorizationCode': instance.authorizationCode,
       'instalmentCount': instance.instalmentCount,
+      'transactionStatus': instance.transactionStatus,
     };
 
 InitArguments _$InitArgumentsFromJson(Map<String, dynamic> json) {
