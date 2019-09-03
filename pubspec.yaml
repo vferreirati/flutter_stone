@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  json_serializable:
+  json_serializable: any
 
 dev_dependencies:
   flutter_test:

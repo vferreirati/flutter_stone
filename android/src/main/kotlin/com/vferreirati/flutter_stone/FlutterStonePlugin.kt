@@ -22,6 +22,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 import stone.application.StoneStart
 import stone.application.enums.ErrorsEnum
 import stone.application.enums.InstalmentTransactionEnum
+import stone.application.enums.TransactionStatusEnum
 import stone.application.enums.TypeOfTransactionEnum
 import stone.application.interfaces.StoneCallbackInterface
 import stone.database.transaction.TransactionObject
@@ -321,6 +322,10 @@ class FlutterStonePlugin(
                 InstalmentTransactionEnum.TEN_INSTALMENT_NO_INTEREST -> 10
                 InstalmentTransactionEnum.ELEVEN_INSTALMENT_NO_INTEREST -> 11
                 else -> 12
+            },
+            transactionStatus = when(transactionObject.transactionStatus) {
+                TransactionStatusEnum.APPROVED -> 1
+                else -> 2
             }
     )
 

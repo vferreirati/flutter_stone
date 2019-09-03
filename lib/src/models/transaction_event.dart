@@ -11,8 +11,9 @@ class TransactionEvent {
   final int typeOfTransaction;
   final String authorizationCode;
   final int instalmentCount;
+  final int transactionStatus;
 
-  TransactionEvent(this.errorCode, this.transactionDate, this.cardBrand, this.cardNumber, this.cardHolderName, this.transactionNumber, this.typeOfTransaction, this.authorizationCode, this.instalmentCount);
+  TransactionEvent(this.errorCode, this.transactionDate, this.cardBrand, this.cardNumber, this.cardHolderName, this.transactionNumber, this.typeOfTransaction, this.authorizationCode, this.instalmentCount, this.transactionStatus);
 
   static TransactionEvent fromJson(Map<String, dynamic> json) => _$TransactionEventFromJson(json);
   Map<String, dynamic> toJson() => _$TransactionEventToJson(this);
