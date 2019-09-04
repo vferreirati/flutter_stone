@@ -82,9 +82,22 @@ class FlutterStone {
     return await _channel.invokeMethod('writeToDisplay', message);
   }
 
+  /// Retrieves the list of bluetooth devices known by this device
   static Future<List<BluetoothDevice>> getPairedDevices() async {
     final jsonString = await _channel.invokeMethod('getPairedDevices');
     final jsonList = json.decode(jsonString);
     return (jsonList as List).map((map) => BluetoothDevice.fromJson(map)).toList();
+  }
+
+  /// Retrives the current connected device 
+  /// Or null if no device is found
+  static Future<BluetoothDevice> getConnectedDevice() async {
+    final jsonString = await _channel.invokeMethod('getConnectedDevice');
+    if(jsonString == null)
+      return null;
+    else {
+      final jsonMap = json.decode(jsonString);
+      return BluetoothDevice.fromJson(jsonMap);
+    }
   }
 }

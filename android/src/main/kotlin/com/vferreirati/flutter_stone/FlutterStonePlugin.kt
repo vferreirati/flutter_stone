@@ -130,6 +130,7 @@ class FlutterStonePlugin(
             }
             "startScan" -> startScan()
             "getPairedDevices" -> result.success(getPairedDevices())
+            "getConnectedDevice" -> result.success(getConnectedDevice())
         }
     }
 
@@ -397,6 +398,11 @@ class FlutterStonePlugin(
         }
         return Gson().toJson(list)
     }
+
+    private fun getConnectedDevice(): String? = if(currentPinpadObject == null)
+        null
+    else
+        Gson().toJson(PinpadDevice(name = currentPinpadObject!!.name, address = currentPinpadObject!!.macAddress))
 
     /**
      * Android callback
