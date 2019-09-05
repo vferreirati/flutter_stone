@@ -3,6 +3,7 @@ part of flutter_stone;
 class FlutterStone {
   static const MethodChannel _channel = const MethodChannel('flutter_stone');
   static const EventChannel _queryChannel = const EventChannel('query_channel');
+  static bool _isIosConnected = false;
 
   FlutterStone._();
 
@@ -62,8 +63,11 @@ class FlutterStone {
   /// returns the connection event
   static Future<ConnectionEvent> connectToDeviceIOS() async {
     final resultString = await _channel.invokeMethod('connect');
+    final event = ConnectionEvent.fromJson(json.decode(resultString));
 
-    return ConnectionEvent.fromJson(json.decode(resultString));
+    _isIosConnected = event.connectionSuccessful;
+
+    return event;
   }
 
   /// Starts a transaction with the supplied
@@ -100,4 +104,6 @@ class FlutterStone {
       return BluetoothDevice.fromJson(jsonMap);
     }
   }
+
+  static bool isIosConnected() => _isIosConnected;
 }
