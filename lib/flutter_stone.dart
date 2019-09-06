@@ -18,6 +18,8 @@ part 'src/models/transaction_event.dart';
 
 part 'src/enums/android_errors_enum.dart';
 
+part 'src/enums/ios_errors_enum.dart';
+
 part 'src/enums/mode_enum.dart';
 
 part 'src/models/init_arguments.dart';

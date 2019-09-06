@@ -116,7 +116,8 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
                             transactionNumber: transactionModel.initiatorTransactionKey,
                             typeofTransaction: transactionModel.type == STNTransactionTypeSimplifiedDebit ? 1 : 2,
                             authorizationCode: transactionModel.authorisationCode,
-                            instalmentCount: obj.instalmentCount
+                            instalmentCount: obj.instalmentCount,
+                            transactionStatus: transactionModel.status == STNTransactionStatusApproved ? 1 : 2
                         )
                         let data = try JSONEncoder().encode(event)
                         let jsonString = String(data: data, encoding: .utf8)
@@ -133,7 +134,8 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
                             transactionNumber: nil,
                             typeofTransaction: nil,
                             authorizationCode: nil,
-                            instalmentCount: nil
+                            instalmentCount: nil,
+                            transactionStatus: nil
                         )
                         
                         let data = try JSONEncoder().encode(event)
@@ -250,6 +252,7 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
         let typeofTransaction: Int?
         let authorizationCode: String?
         let instalmentCount: Int?
+        let transactionStatus: Int?
     }
     
     private func mapErrorCodeToDartErrorCode(errorCode: Int?) -> Int? {
