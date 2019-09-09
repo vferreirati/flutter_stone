@@ -61,9 +61,9 @@ class FlutterStone {
   /// Attempts to establish a session with the current connected device
   /// This method should be only called from a iOS Host.
   /// returns the connection event
-  static Future<ConnectionEvent> connectToDeviceIOS() async {
+  static Future<IOSConnectionEvent> connectToDeviceIOS() async {
     final resultString = await _channel.invokeMethod('connect');
-    final event = ConnectionEvent.fromJson(json.decode(resultString));
+    final event = IOSConnectionEvent.fromJson(json.decode(resultString));
 
     _isIosConnected = event.connectionSuccessful;
 

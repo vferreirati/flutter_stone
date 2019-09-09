@@ -12,6 +12,8 @@ part 'src/flutter_stone.dart';
 
 part 'src/models/connection_event.dart';
 
+part 'src/models/ios_connection_event.dart';
+
 part 'src/models/transaction.dart';
 
 part 'src/models/transaction_event.dart';

@@ -5,6 +5,7 @@ import StoneSDK
 public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
 
     private let registrar: FlutterPluginRegistrar
+    private var currentDevice: STNPinpad?
     
     init(_ registrar: FlutterPluginRegistrar) {
         self.registrar = registrar
@@ -64,12 +65,17 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
             STNPinPadConnectionProvider().select(device!) { (connected, error) in
                 do {
                     let dartErrorCode: Int?
+                    let selectedDevice: BluetoothDevice?
                     if(connected) {
                         dartErrorCode = nil
+                        self.currentDevice = device
+                        selectedDevice = BluetoothDevice(name: device!.name)
                     } else {
                         dartErrorCode = self.mapErrorCodeToDartErrorCode(errorCode: (error as NSError?)?.code)
+                        self.currentDevice = nil
+                        selectedDevice = nil
                     }
-                    let event = ConnectionEvent(errorCode: dartErrorCode)
+                    let event = IOSConnectionEvent(errorCode: dartErrorCode, device: selectedDevice)
                     let data = try JSONEncoder().encode(event)
                     let jsonString = String(data: data, encoding: .utf8)
                     result(jsonString)
@@ -80,7 +86,7 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
             }
         } else {
             do {
-                let event = ConnectionEvent(errorCode: SwiftFlutterStonePlugin.PINPAD_CONNECTION_NOT_FOUND)
+                let event = IOSConnectionEvent(errorCode: SwiftFlutterStonePlugin.PINPAD_CONNECTION_NOT_FOUND, device: nil)
                 let data = try JSONEncoder().encode(event)
                 let jsonString = String(data: data, encoding: .utf8)
                 result(jsonString)
@@ -226,8 +232,13 @@ public class SwiftFlutterStonePlugin: NSObject, FlutterPlugin {
         let stoneCode: String
     }
     
-    struct ConnectionEvent: Codable {
+    struct IOSConnectionEvent: Codable {
         let errorCode: Int?
+        let device: BluetoothDevice?
+    }
+    
+    struct BluetoothDevice: Codable {
+        let name: String
     }
     
     struct Transaction: Codable {

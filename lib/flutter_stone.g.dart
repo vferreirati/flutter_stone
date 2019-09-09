@@ -17,6 +17,21 @@ Map<String, dynamic> _$ConnectionEventToJson(ConnectionEvent instance) =>
       'errorCode': instance.errorCode,
     };
 
+IOSConnectionEvent _$IOSConnectionEventFromJson(Map<String, dynamic> json) {
+  return IOSConnectionEvent(
+    device: json['device'] == null
+        ? null
+        : BluetoothDevice.fromJson(json['device'] as Map<String, dynamic>),
+    errorCode: json['errorCode'] as int,
+  );
+}
+
+Map<String, dynamic> _$IOSConnectionEventToJson(IOSConnectionEvent instance) =>
+    <String, dynamic>{
+      'errorCode': instance.errorCode,
+      'device': instance.device,
+    };
+
 Transaction _$TransactionFromJson(Map<String, dynamic> json) {
   return Transaction(
     json['amount'] as String,
