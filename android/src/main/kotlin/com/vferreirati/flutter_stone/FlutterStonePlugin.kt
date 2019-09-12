@@ -327,7 +327,8 @@ class FlutterStonePlugin(
             transactionStatus = when(transactionObject.transactionStatus) {
                 TransactionStatusEnum.APPROVED -> 1
                 else -> 2
-            }
+            },
+            nsu = transactionObject.recipientTransactionIdentification
     )
 
     /**

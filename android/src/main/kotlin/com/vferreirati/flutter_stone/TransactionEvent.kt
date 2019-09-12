@@ -10,5 +10,6 @@ data class TransactionEvent(
         val typeOfTransaction: Int? = null,
         val authorizationCode: String? = null,
         val instalmentCount: Int? = null,
-        val transactionStatus: Int? = null
+        val transactionStatus: Int? = null,
+        val nsu: String? = null
 )
